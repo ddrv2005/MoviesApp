@@ -13,6 +13,14 @@ fun View.hide() {
     this.visibility = View.GONE
 }
 
+fun View.display(show: Boolean) {
+    if (show) {
+        this.show()
+    } else {
+        this.hide()
+    }
+}
+
 fun ImageView.loadImage(url: String) {
     val fullUrl = "${BuildConfig.IMAGE_URL}$url"
     Picasso.get().load(fullUrl).into(this)

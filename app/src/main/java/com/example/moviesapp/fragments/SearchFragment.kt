@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.moviesapp.R
 import com.example.moviesapp.adapters.MovieAdapter
 import com.example.moviesapp.databinding.FragmentSearchBinding
 import com.example.moviesapp.utils.hide
@@ -87,6 +89,7 @@ class SearchFragment: Fragment() {
 
     private fun showError() {
         binding.progressBarMovies.hide()
+        Toast.makeText(requireContext(), R.string.error_from_server, Toast.LENGTH_LONG).show()
     }
 
 }

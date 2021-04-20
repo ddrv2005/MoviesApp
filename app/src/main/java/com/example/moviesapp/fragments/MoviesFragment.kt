@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesapp.R
 import com.example.moviesapp.adapters.MovieAdapter
+import com.example.moviesapp.databinding.ErrorLayoutBinding
 import com.example.moviesapp.databinding.FragmentMoviesBinding
+import com.example.moviesapp.utils.display
 import com.example.moviesapp.utils.hide
 import com.example.moviesapp.utils.show
 import com.example.moviesapp.viewmodels.PopularMoviesActions
@@ -49,6 +51,7 @@ class MoviesFragment: Fragment() {
         popularMoviesViewModel.popularMoviesActions.observe(viewLifecycleOwner, Observer {
             when (it) {
                 PopularMoviesActions.OnLoading -> binding.progressBarMovies.show()
+                PopularMoviesActions.OnError -> showError()
                 is PopularMoviesActions.OnMoviesRetrieved -> {
                     binding.progressBarMovies.hide()
                     adapter.setMovies(it.movies)
@@ -64,6 +67,11 @@ class MoviesFragment: Fragment() {
             }
             true
         }
+
+        binding.layoutError.buttonRetry.setOnClickListener {
+            showViews(true)
+            popularMoviesViewModel.requestPopularMovies()
+        }
     }
 
     private fun setupRecycleView() {
@@ -71,5 +79,16 @@ class MoviesFragment: Fragment() {
             adapter = this@MoviesFragment.adapter
             layoutManager = GridLayoutManager(requireContext(), 2)
         }
+    }
+
+    private fun showError() {
+        showViews(false)
+    }
+
+    private fun showViews(show: Boolean) {
+        binding.progressBarMovies.display(show)
+        binding.toolbarMovie.display(show)
+        binding.recyclerViewMovies.display(show)
+        binding.layoutError.root.display(!show)
     }
 }
