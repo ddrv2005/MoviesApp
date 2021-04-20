@@ -4,4 +4,5 @@
     <string name="search_movies">Search movies</string>
     <string name="error_from_server">Sorry! \nSomething is wrong, please retry.</string>
     <string name="retry">Retry</string>
+    <string name="no_results">Ups! \nThere\'s no result to show.</string>
 </resources>

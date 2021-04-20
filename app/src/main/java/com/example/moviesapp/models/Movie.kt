@@ -3,7 +3,7 @@ package com.example.moviesapp.models
 import com.google.gson.annotations.SerializedName
 
 data class Movie(
-    @SerializedName("poster_path") val posterPath : String,
+    @SerializedName("poster_path") val posterPath: String? = null,
     @SerializedName("adult") val adult : Boolean,
     @SerializedName("overview") val overview : String,
     @SerializedName("release_date") val releaseDate : String,

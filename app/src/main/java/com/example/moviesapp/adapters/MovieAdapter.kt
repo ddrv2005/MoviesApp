@@ -32,7 +32,9 @@ class MovieAdapter(val listener: (Int) -> Unit): RecyclerView.Adapter<MovieAdapt
     class MovieHolder(val view: ItemMovieBinding): RecyclerView.ViewHolder(view.root){
         fun render(movie: Movie, listener: (Int) -> Unit){
             view.textViewName.text = movie.title
-            view.imageViewMovie.loadImage(movie.posterPath)
+            movie.posterPath?.let {
+                view.imageViewMovie.loadImage(it)
+            }
             view.root.setOnClickListener {
                 listener(movie.id)
             }

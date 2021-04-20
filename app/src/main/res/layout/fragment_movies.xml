@@ -41,4 +41,10 @@
         android:visibility="gone"
         tools:visibility="visible"/>
 
+    <include
+        android:id="@+id/layout_empty"
+        layout="@layout/empty_layout"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

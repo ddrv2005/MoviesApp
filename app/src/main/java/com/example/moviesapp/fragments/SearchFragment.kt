@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesapp.R
 import com.example.moviesapp.adapters.MovieAdapter
 import com.example.moviesapp.databinding.FragmentSearchBinding
+import com.example.moviesapp.utils.display
 import com.example.moviesapp.utils.hide
 import com.example.moviesapp.utils.show
 import com.example.moviesapp.viewmodels.SearchMovieActions
@@ -70,7 +71,11 @@ class SearchFragment: Fragment() {
                 SearchMovieActions.OnError -> showError()
                 is SearchMovieActions.OnMoviesRetrieved -> {
                     binding.progressBarMovies.hide()
-                    adapter.setMovies(it.result)
+                    if (it.result.isNotEmpty()) {
+                        adapter.setMovies(it.result)
+                    } else {
+                        showEmpty()
+                    }
                 }
             }
         })
@@ -89,7 +94,7 @@ class SearchFragment: Fragment() {
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                binding.progressBarMovies.show()
+                showViews(true)
                 searchMoviesViewModel.searchMovie(query)
                 return true
             }
@@ -106,6 +111,16 @@ class SearchFragment: Fragment() {
     private fun showError() {
         binding.progressBarMovies.hide()
         Toast.makeText(requireContext(), R.string.error_from_server, Toast.LENGTH_LONG).show()
+    }
+
+    private fun showEmpty() {
+        showViews(false)
+    }
+
+    private fun showViews(show: Boolean) {
+        binding.recyclerViewMovies.display(show)
+        binding.progressBarMovies.display(show)
+        binding.layoutEmpty.root.display(!show)
     }
 
 }

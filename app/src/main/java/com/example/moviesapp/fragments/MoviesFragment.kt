@@ -54,7 +54,11 @@ class MoviesFragment: Fragment() {
                 PopularMoviesActions.OnError -> showError()
                 is PopularMoviesActions.OnMoviesRetrieved -> {
                     binding.progressBarMovies.hide()
-                    adapter.setMovies(it.movies)
+                    if (it.movies.isNotEmpty()) {
+                        adapter.setMovies(it.movies)
+                    } else {
+                        showEmptyView(false)
+                    }
                 }
             }
         })
@@ -90,5 +94,13 @@ class MoviesFragment: Fragment() {
         binding.toolbarMovie.display(show)
         binding.recyclerViewMovies.display(show)
         binding.layoutError.root.display(!show)
+    }
+
+    private fun showEmptyView(show: Boolean) {
+        binding.progressBarMovies.display(show)
+        binding.toolbarMovie.display(show)
+        binding.recyclerViewMovies.display(show)
+        binding.layoutError.root.display(show)
+        binding.layoutEmpty.root.display(!show)
     }
 }
