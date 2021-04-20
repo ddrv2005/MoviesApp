@@ -10,9 +10,6 @@
         android:name="com.example.moviesapp.fragments.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
-        <action
-            android:id="@+id/action_splashFragment_to_moviesFragment"
-            app:destination="@id/moviesFragment" />
     </fragment>
 
     <fragment
@@ -20,4 +17,8 @@
         android:name="com.example.moviesapp.fragments.MoviesFragment"
         android:label="MoviesFragment"
         tools:layout="@layout/fragment_movies"/>
+
+    <action
+        android:id="@+id/action_splashFragment_to_moviesFragment"
+        app:destination="@id/moviesFragment" />
 </navigation>
