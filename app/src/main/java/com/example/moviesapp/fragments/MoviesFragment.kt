@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.moviesapp.R
 import com.example.moviesapp.adapters.MovieAdapter
 import com.example.moviesapp.databinding.FragmentMoviesBinding
 import com.example.moviesapp.utils.hide
@@ -38,6 +39,7 @@ class MoviesFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initListeners()
         setupRecycleView()
     }
 
@@ -53,6 +55,15 @@ class MoviesFragment: Fragment() {
                 }
             }
         })
+    }
+
+    private fun initListeners() {
+        binding.toolbarMovie.setOnMenuItemClickListener {
+            if (it.itemId == R.id.movie_search) {
+                findNavController().navigate(MoviesFragmentDirections.actionMoviesFragmentToSearchMovieFragment())
+            }
+            true
+        }
     }
 
     private fun setupRecycleView() {

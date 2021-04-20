@@ -6,7 +6,7 @@ import com.example.moviesapp.models.ResponseHandler
 import com.example.moviesapp.network.MoviesApi
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import java.lang.Exception
+import kotlin.Exception
 
 class MoviesRepository(val responseHandler: ResponseHandler): KoinComponent {
 
@@ -16,6 +16,14 @@ class MoviesRepository(val responseHandler: ResponseHandler): KoinComponent {
         return try {
             responseHandler.handleSuccess(moviesApi.getPopularMovies()
                 .results)
+        } catch (exception: Exception) {
+            responseHandler.handleException(exception)
+        }
+    }
+
+    suspend fun searchMovie(query: String): Response<List<Movie>> {
+        return try {
+            responseHandler.handleSuccess(moviesApi.searchMovie(query).results)
         } catch (exception: Exception) {
             responseHandler.handleException(exception)
         }

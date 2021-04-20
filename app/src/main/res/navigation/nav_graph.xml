@@ -25,6 +25,9 @@
                 app:argType="integer"
                 android:defaultValue="-1" />
         </action>
+        <action
+            android:id="@+id/action_moviesFragment_to_searchMovieFragment"
+            app:destination="@id/searchMovieFragment" />
     </fragment>
 
     <fragment
@@ -36,6 +39,16 @@
             android:name="movieId"
             app:argType="integer"
             android:defaultValue="-1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchMovieFragment"
+        android:name="com.example.moviesapp.fragments.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchMovieFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
 
     <action
