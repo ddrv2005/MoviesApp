@@ -10,7 +10,7 @@ import com.example.moviesapp.models.Movie
 import com.example.moviesapp.utils.loadImage
 import com.squareup.picasso.Picasso
 
-class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
+class MovieAdapter(val listener: (Int) -> Unit): RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
 
     private var movies: List<Movie> = emptyList()
 
@@ -19,7 +19,7 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
     }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-        holder.render(movies[position])
+        holder.render(movies[position], listener)
     }
 
     override fun getItemCount(): Int = movies.size
@@ -30,9 +30,12 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
     }
 
     class MovieHolder(val view: ItemMovieBinding): RecyclerView.ViewHolder(view.root){
-        fun render(movie: Movie){
+        fun render(movie: Movie, listener: (Int) -> Unit){
             view.textViewName.text = movie.title
             view.imageViewMovie.loadImage(movie.posterPath)
+            view.root.setOnClickListener {
+                listener(movie.id)
+            }
         }
     }
 }

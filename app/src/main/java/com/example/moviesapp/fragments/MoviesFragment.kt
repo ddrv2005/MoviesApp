@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesapp.adapters.MovieAdapter
 import com.example.moviesapp.databinding.FragmentMoviesBinding
@@ -21,7 +22,9 @@ class MoviesFragment: Fragment() {
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
     private val adapter by lazy {
-        MovieAdapter()
+        MovieAdapter {
+            findNavController().navigate(MoviesFragmentDirections.actionMoviesFragmentToMovieDetailFragment(it))
+        }
     }
 
     override fun onCreateView(
