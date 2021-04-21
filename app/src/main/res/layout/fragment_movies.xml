@@ -35,4 +35,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <include
+        android:id="@+id/layout_error"
+        layout="@layout/error_layout"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

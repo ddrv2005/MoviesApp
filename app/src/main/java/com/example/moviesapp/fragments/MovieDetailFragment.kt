@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.moviesapp.databinding.FragmentMovieDetailBinding
 import com.example.moviesapp.models.MovieDetail
+import com.example.moviesapp.utils.display
 import com.example.moviesapp.utils.hide
 import com.example.moviesapp.utils.loadImage
 import com.example.moviesapp.utils.show
@@ -32,14 +33,27 @@ class MovieDetailFragment: Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.layoutError.buttonRetry.setOnClickListener {
+            showViews(true)
+            requestDetail()
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         movieDetailViewModel.movieDetailActions.observe(viewLifecycleOwner, Observer {
             when (it) {
                 MovieDetailActions.OnLoading -> binding.progressBar.show()
+                MovieDetailActions.OnError -> showError()
                 is MovieDetailActions.OnMovieDetailRetrieved -> loadInfo(it.movieDetail)
             }
         })
+        requestDetail()
+    }
+
+    private fun requestDetail() {
         if (arguments.movieId != -1) {
             movieDetailViewModel.requestPopularMovies(arguments.movieId)
         } else {
@@ -58,6 +72,15 @@ class MovieDetailFragment: Fragment() {
     }
 
     private fun showError() {
+        showViews(false)
+    }
 
+    private fun showViews(show: Boolean) {
+        binding.progressBar.display(show)
+        binding.imageViewMovieDetail.display(show)
+        binding.textViewNameDatail.display(show)
+        binding.textViewMoviesDetail.display(show)
+        binding.viewFilter.display(show)
+        binding.layoutError.root.display(!show)
     }
 }

@@ -2,4 +2,6 @@
     <string name="app_name">MoviesApp</string>
     <string name="movies">Movies</string>
     <string name="search_movies">Search movies</string>
+    <string name="error_from_server">Sorry! \nSomething is wrong, please retry.</string>
+    <string name="retry">Retry</string>
 </resources>
